@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.test.project.databinding.PageApplicationListBinding
 
+
 class AppListFragment : Fragment() {
 
     private var _binding: PageApplicationListBinding? = null
@@ -50,6 +51,21 @@ class AppListFragment : Fragment() {
         }
 
         viewModel.setSearchQuery("")
+
+        fetchData()
+    }
+    private fun fetchData() {
+        if (!ProgressUtils.isShowing()) {
+            ProgressUtils.showLoadingDialog(requireContext())
+        }
+
+        // Fetch data from ViewModel
+        viewModel.fetchApps(378)
+
+        // Hide loading dialog when data is fetched
+        viewModel.apps.observe(viewLifecycleOwner) { apps ->
+            ProgressUtils.cancelLoading()
+        }
     }
 
     override fun onDestroyView() {

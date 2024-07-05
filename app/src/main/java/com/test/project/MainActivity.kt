@@ -9,7 +9,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.test.project.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private val appViewModel: ApplicationViewModel by viewModels()
     val tabTitles = listOf("Applications", "Settings")
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewPagerAdapter: ViewPagerAdapter
@@ -18,7 +17,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         binding.backBtn.setOnClickListener {
             finishAffinity()
         }

@@ -25,4 +25,8 @@
         <!-- inactive track color (30% transparency) -->
         <item name="android:colorForeground">#686767</item>
     </style>
+
+    <style name="ProgressAccent" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorAccent">@color/green</item>
+    </style>
 </resources>
