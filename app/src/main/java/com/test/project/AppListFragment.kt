@@ -44,9 +44,7 @@ class AppListFragment : Fragment() {
 
             override fun afterTextChanged(s: Editable?) {}
         })
-//        viewModel.apps.observeForever { users ->
-//            adapter.submitList(users)
-//        }
+
         viewModel.filteredApps.observe(viewLifecycleOwner) { apps ->
             adapter.submitList(apps)
         }

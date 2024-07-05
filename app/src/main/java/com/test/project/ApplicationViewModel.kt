@@ -47,15 +47,6 @@ class ApplicationViewModel : ViewModel() {
         }
     }
 
-//    val filteredApps: LiveData<List<App>> = _searchQuery.map { query ->
-//        if (query.isNullOrEmpty()) {
-//            _apps.value ?: emptyList()
-//        } else {
-//            _apps.value?.filter { app ->
-//                app.app_name.contains(query, ignoreCase = true)
-//            } ?: emptyList()
-//        }
-//    }
 
     fun setSearchQuery(query: String) {
         _searchQuery.value = query

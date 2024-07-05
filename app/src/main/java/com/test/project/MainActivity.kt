@@ -25,10 +25,8 @@ class MainActivity : AppCompatActivity() {
 
         viewPagerAdapter = ViewPagerAdapter(this)
 
-        // Add your fragments here
         viewPagerAdapter.addFragment(AppListFragment(), "Applications")
-        // Add other fragments if needed
-         viewPagerAdapter.addFragment(SettingsFragment(), "Settings")
+        viewPagerAdapter.addFragment(SettingsFragment(), "Settings")
 
         binding.viewPager.adapter = viewPagerAdapter
 
@@ -37,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         }.attach()
     }
     override fun onBackPressed() {
+        super.onBackPressed()
         finishAffinity()
     }
 }
