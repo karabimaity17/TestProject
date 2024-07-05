@@ -7,51 +7,31 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AutoCompleteTextView
 import android.widget.ImageView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class ViewPagerAdapter (
-    private val appViewModel: ApplicationViewModel,
-    private val tabTitles: List<String>
-) : RecyclerView.Adapter<ViewPagerAdapter.PageViewHolder>() {
+class ViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PageViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.page_application_list, parent, false)
-        return PageViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: PageViewHolder, position: Int) {
-        // Bind ViewModel to Fragment or RecyclerView
-        holder.bind(appViewModel)
-    }
+    private val fragmentList: MutableList<Fragment> = mutableListOf()
+    private val fragmentTitleList: MutableList<String> = mutableListOf()
 
     override fun getItemCount(): Int {
-        return tabTitles.size
+        return fragmentList.size
     }
 
-    class PageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(viewModel: ApplicationViewModel) {
-            // Setup RecyclerView or Fragment
-            val recyclerView = itemView.findViewById<RecyclerView>(R.id.recyclerView)
-            val search_text = itemView.findViewById<AutoCompleteTextView>(R.id.search_text)
-            val clear = itemView.findViewById<ImageView>(R.id.clear)
-            recyclerView.layoutManager = LinearLayoutManager(itemView.context)
-            val appAdapter = ApplicationAdapter()
-            recyclerView.adapter = appAdapter
+    override fun createFragment(position: Int): Fragment {
+        return fragmentList[position]
+    }
 
-            viewModel.filteredUsers.observeForever { users ->
-                appAdapter.submitList(users)
-            }
+    fun addFragment(fragment: Fragment, title: String) {
+        fragmentList.add(fragment)
+        fragmentTitleList.add(title)
+    }
 
-            search_text.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    viewModel.setSearchQuery(s.toString())
-                }
-
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            })
-        }
+    fun getPageTitle(position: Int): CharSequence {
+        return fragmentTitleList[position]
     }
 }

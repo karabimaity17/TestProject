@@ -20,19 +20,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_10sdp"
-        android:fontFamily="@font/fonts_medium"
-        android:letterSpacing="0.1"
+        android:fontFamily="@font/fonts_regular"
+        android:letterSpacing="0.05"
         android:text="Assistant"
         android:layout_toRightOf="@id/icon_image"
         android:layout_toLeftOf="@id/switchButton"
         android:textColor="@color/black"
-        android:textSize="@dimen/_14sdp" />
+        android:textSize="@dimen/_12sdp"
+        android:maxLength="30"
+        android:maxLines="1"
+        android:ellipsize="end"/>
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchButton"
         android:layout_width="wrap_content"
         android:layout_centerInParent="true"
-        android:checked="true"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:theme="@style/Switch"
