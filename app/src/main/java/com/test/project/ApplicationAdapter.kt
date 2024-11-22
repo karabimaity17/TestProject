@@ -39,7 +39,7 @@ class ApplicationAdapter : ListAdapter<App, ApplicationAdapter.ApplicationViewHo
                 .placeholder(R.drawable.loading)
                 .error(R.drawable.photo)
                 .into(icon_image);
-            switchView.isChecked = app.status.toLowerCase() == "active"
+            switchView.isChecked = app.status.equals("active",true)
         }
     }
     class AppDiffCallback : DiffUtil.ItemCallback<App>() {
